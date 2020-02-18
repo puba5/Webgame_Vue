@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no,inital-scale=1.0,minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My test page</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+        <div>{{first}} 곱하기 {{second}}는???</div>
+        <form v-on:submit="onSubmitForm">
+            <input type="number" ref="answer" v-model="value" placeholder="정답을 입력하세요"> 
+            <button type="submit">입력</button>
+        </form>
+        <div id="result">{{result}}</div>
+  </body>
+  <script>
+    const app = new Vue({
+      el: "#root",
+      data: {
+        first: Math.ceil(Math.random()*9),
+        second: Math.ceil(Math.random()*9),
+        value: "",
+        result: ""
+      },
+      methods: {
+        onSubmitForm(e){
+            e.preventDefault();
+            if(this.first*this.second==this.value){
+                    this.result="정답";
+            }
+            else{
+                    this.result="땡!!!!!"+this.first+" 곱하기 "+this.second+"는 "+this.value+"입니다!";
+            }
+            this.$refs.answer.focus();
+            this.value="";
+            this.first=Math.ceil(Math.random()*9);
+            this.second=Math.ceil(Math.random()*9);
+        }
+      }
+    });
+  </script>
+</html>
